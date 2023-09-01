@@ -1,5 +1,7 @@
 package com.loja;
 
+import org.springframework.web.bind.annotation.PostMapping;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -52,4 +54,41 @@ public class TabelaProdutos {
         }
         return produtoProcurado;
     }
+
+
+    /**
+     * Método wue cadastra um novo produto
+     * Primeiro busca o ultimo item
+     * Depois incrementa o Id
+     * Atribui novo Id
+     * @param novoProduto
+     * @return
+     */
+    public Produto cadastrarNovoProduto(Produto novoProduto) {
+        //Lista com 6 itens vai de 0 a 5, vai pegar o número de itens -1 = 5
+        int ultimoIndex = this.produtos.size() - 1;
+        Produto ultimoProduto = this.produtos.get(ultimoIndex);
+        int proximoId = ultimoProduto.getId() + 1;
+        novoProduto.setId(proximoId);
+        this.produtos.add(novoProduto);
+        return novoProduto;
+    }
+
+    /**
+     * Método que atualiz um produto
+     * Primeiro busca o produto a atualizar pelo Id
+     * Depois atribui as novas infos
+     * E salva o produto atualizado
+     * @param produtoId
+     * @param produtoAtualizar
+     */
+    public void atualizarProduto(int produtoId, Produto produtoAtualizar) {
+        Produto produtoProcurado = this.buscarProdutoId(produtoId);
+        if (produtoProcurado != null){
+            produtoProcurado.setNome(produtoAtualizar.getNome());
+            produtoProcurado.setDescricao(produtoAtualizar.getDescricao());
+            produtoProcurado.setValorUnitario(produtoAtualizar.getValorUnitario());
+        }
+    }
+
 }
