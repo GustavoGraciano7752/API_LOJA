@@ -1,6 +1,8 @@
 package com.loja;
 
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -90,5 +92,11 @@ public class TabelaProdutos {
             produtoProcurado.setValorUnitario(produtoAtualizar.getValorUnitario());
         }
     }
+
+    public void removerProdutos(int produtoId) {
+        Produto produtoRemover = this.buscarProdutoId(produtoId);
+        this.produtos.remove(produtoRemover);
+    }
+
 
 }
